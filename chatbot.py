@@ -1,102 +1,151 @@
+"""Medical Diagnosis Chatbot — Streamlit UI."""
+
+import json
 import os
+
+import pandas as pd
 import streamlit as st
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.chains import RetrievalQA
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
-from langchain_community.vectorstores import FAISS
-from langchain_core.prompts import PromptTemplate
-from langchain_huggingface import HuggingFaceEndpoint
-from langchain_groq import ChatGroq
-
-
-## Uncomment the following files if you're not using pipenv as your virtual environment manager
-#from dotenv import load_dotenv, find_dotenv
-#load_dotenv(find_dotenv())
-
-
-DB_FAISS_PATH="vectorstore/db_faiss"
-@st.cache_resource
-def get_vectorstore():
-    embedding_model=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-    db=FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
-    return db
+from config import (
+    DEFAULT_MODEL, GROQ_MODELS, TARGET_ACCURACY,
+    EVAL_DATASET, RESULTS_PATH,
+)
+from rag import build_qa_chain
+from evaluation import run_evaluation
 
 
-def set_custom_prompt(custom_prompt_template):
-    prompt=PromptTemplate(template=custom_prompt_template, input_variables=["context", "question"])
-    return prompt
+# ── Chatbot tab ───────────────────────────────────────────────────────────────
 
+def render_chatbot_tab():
+    st.header("Medical Diagnosis Assistant")
 
-def load_llm(huggingface_repo_id, HF_TOKEN):
-    llm=HuggingFaceEndpoint(
-        repo_id=huggingface_repo_id,
-        temperature=0.5,
-        model_kwargs={"token":HF_TOKEN,
-                      "max_length":"512"}
-    )
-    return llm
-
-
-def main():
-    st.title("Ask Chatbot!")
-
-    if 'messages' not in st.session_state:
+    if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    for message in st.session_state.messages:
-        st.chat_message(message['role']).markdown(message['content'])
+    for msg in st.session_state.messages:
+        st.chat_message(msg["role"]).markdown(msg["content"])
 
-    prompt=st.chat_input("Pass your prompt here")
+    prompt = st.chat_input("Ask a medical question...")
+    if not prompt:
+        return
 
-    if prompt:
-        st.chat_message('user').markdown(prompt)
-        st.session_state.messages.append({'role':'user', 'content': prompt})
+    st.chat_message("user").markdown(prompt)
+    st.session_state.messages.append({"role": "user", "content": prompt})
 
-        CUSTOM_PROMPT_TEMPLATE = """
-                Use the pieces of information provided in the context to answer user's question.
-                If you dont know the answer, just say that you dont know, dont try to make up an answer. 
-                Dont provide anything out of the given context
+    try:
+        model = st.session_state.get("selected_model", DEFAULT_MODEL)
+        qa = build_qa_chain(model=model)
+        resp = qa.invoke({"query": prompt})
+        answer = resp["result"] + "\n\n**Source Docs:**\n" + str(resp["source_documents"])
+        st.chat_message("assistant").markdown(answer)
+        st.session_state.messages.append({"role": "assistant", "content": answer})
+    except Exception as exc:
+        st.error(f"Error: {exc}")
 
-                Context: {context}
-                Question: {question}
 
-                Start the answer directly. No small talk please.
-                """
-        
-        #HUGGINGFACE_REPO_ID="mistralai/Mistral-7B-Instruct-v0.3" # PAID
-        #HF_TOKEN=os.environ.get("HF_TOKEN")  
+# ── Evaluation tab ────────────────────────────────────────────────────────────
 
-        #TODO: Create a Groq API key and add it to .env file
-        
-        try: 
-            vectorstore=get_vectorstore()
-            if vectorstore is None:
-                st.error("Failed to load the vector store")
+def render_evaluation_tab():
+    st.header("RAG Evaluation Pipeline")
+    st.markdown(
+        "RAGAS evaluation over the medical test set. Measures **faithfulness**, "
+        f"**answer relevancy**, and **context precision** (target: **{TARGET_ACCURACY}**). "
+        "All LLM calls use `temperature=0` for deterministic scores."
+    )
 
-            qa_chain = RetrievalQA.from_chain_type(
-                llm=ChatGroq(
-                    model_name="meta-llama/llama-4-maverick-17b-128e-instruct",  # free, fast Groq-hosted model
-                    temperature=0.0,
-                    groq_api_key=os.environ["GROQ_API_KEY"],
-                ),
-                chain_type="stuff",
-                retriever=vectorstore.as_retriever(search_kwargs={'k':3}),
-                return_source_documents=True,
-                chain_type_kwargs={'prompt': set_custom_prompt(CUSTOM_PROMPT_TEMPLATE)}
+    # Show previous results
+    if os.path.exists(RESULTS_PATH):
+        with open(RESULTS_PATH, encoding="utf-8") as f:
+            cached = json.load(f)
+        agg, meta = cached["aggregate_scores"], cached["metadata"]
+
+        st.subheader("Last Evaluation Results")
+        st.caption(
+            f"{meta.get('timestamp', '?')} · Model: {meta.get('model', '?')} · "
+            f"{meta.get('num_questions', '?')} questions"
+        )
+
+        c1, c2, c3, c4 = st.columns(4)
+        for col, key, label in [
+            (c1, "faithfulness", "Faithfulness"),
+            (c2, "answer_relevancy", "Answer Relevancy"),
+            (c3, "context_precision", "Context Precision"),
+            (c4, "overall_accuracy", "Overall Accuracy"),
+        ]:
+            col.metric(label, f"{agg[key]:.4f}",
+                       delta="Target met" if agg[key] >= TARGET_ACCURACY else "Below target")
+
+        with st.expander("Per-question breakdown"):
+            per_q = cached.get("per_question_scores", [])
+            if per_q:
+                df = pd.DataFrame(per_q)[["question", "faithfulness", "answer_relevancy", "context_precision"]]
+                df.index += 1
+                st.dataframe(df, use_container_width=True)
+
+        with open(RESULTS_PATH, "rb") as f:
+            st.download_button("Download eval_results.json", f, "eval_results.json", "application/json")
+        st.divider()
+
+    # Run new evaluation
+    st.subheader("Run New Evaluation")
+
+    api_key = os.environ.get("GROQ_API_KEY", "")
+    if not api_key:
+        st.warning("GROQ_API_KEY not set. Add it to .env and restart.")
+        return
+
+    with open(EVAL_DATASET, encoding="utf-8") as f:
+        n = len(json.load(f))
+
+    st.info(f"Dataset: **{n} questions** available.")
+    num_samples = st.slider("Test cases to evaluate", 1, n, min(10, n),
+                            help="Fewer = faster and fewer API tokens.")
+    st.caption(f"Selected **{num_samples}** of {n} · ~{num_samples * 2} Groq calls · "
+               f"~{num_samples * 2}-{num_samples * 4} min")
+
+    if st.button("Run Evaluation", type="primary"):
+        model = st.session_state.get("selected_model", DEFAULT_MODEL)
+        bar = st.progress(0.0, text="Starting...")
+        status = st.empty()
+        try:
+            run_evaluation(
+                api_key, model, num_samples,
+                progress_cb=lambda v: bar.progress(min(v, 1.0)),
+                status_cb=lambda m: status.text(m),
             )
+            st.success("Evaluation complete! Results saved to eval_results.json.")
+            st.rerun()
+        except Exception as exc:
+            st.error(f"Evaluation failed: {exc}")
 
-            response=qa_chain.invoke({'query':prompt})
 
-            result=response["result"]
-            source_documents=response["source_documents"]
-            result_to_show=result+"\nSource Docs:\n"+str(source_documents)
-            #response="Hi, I am MediBot!"
-            st.chat_message('assistant').markdown(result_to_show)
-            st.session_state.messages.append({'role':'assistant', 'content': result_to_show})
+# ── App ───────────────────────────────────────────────────────────────────────
 
-        except Exception as e:
-            st.error(f"Error: {str(e)}")
+def main():
+    st.set_page_config(page_title="Medical Diagnosis Chatbot", page_icon="\U0001fa7a", layout="wide")
+
+    with st.sidebar:
+        st.title("Settings")
+        current = st.session_state.get("selected_model", DEFAULT_MODEL)
+        selected = st.selectbox("Groq model", GROQ_MODELS, index=GROQ_MODELS.index(current))
+        if selected != current:
+            st.session_state["selected_model"] = selected
+            st.session_state["messages"] = []
+        st.caption(f"Active: `{selected}`")
+        st.divider()
+        st.markdown("**Tip:** smaller models (20b, 7b) are faster and use fewer tokens.")
+
+    chat_tab, eval_tab = st.tabs(["\U0001f4ac Chatbot", "\U0001f4ca Evaluation"])
+    with chat_tab:
+        render_chatbot_tab()
+    with eval_tab:
+        render_evaluation_tab()
+
 
 if __name__ == "__main__":
     main()

@@ -12,6 +12,9 @@ pypdf = "*"
 streamlit = "*"
 langchain-groq = "*"
 sentence-transformers = "*"
+python-dotenv = "*"
+ragas = "*"
+datasets = "*"
 
 [dev-packages]
 

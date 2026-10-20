@@ -1,0 +1,206 @@
+[
+  {
+    "question": "What are the common symptoms of diabetes mellitus?",
+    "ground_truth": "Common symptoms of diabetes mellitus include increased thirst, frequent urination, fatigue, blurred vision, slow healing of wounds, and unexplained weight loss."
+  },
+  {
+    "question": "What is hypertension and what are its risk factors?",
+    "ground_truth": "Hypertension is persistently high blood pressure in the arteries. Risk factors include obesity, smoking, excessive alcohol consumption, high salt intake, physical inactivity, stress, and family history."
+  },
+  {
+    "question": "What causes asthma and how is it treated?",
+    "ground_truth": "Asthma is caused by inflammation and narrowing of the airways, triggered by allergens, exercise, cold air, or respiratory infections. Treatment includes bronchodilators, inhaled corticosteroids, and avoidance of triggers."
+  },
+  {
+    "question": "What is the difference between Type 1 and Type 2 diabetes?",
+    "ground_truth": "Type 1 diabetes is an autoimmune condition where the pancreas produces no insulin. Type 2 diabetes involves insulin resistance and relative insulin deficiency, and is often associated with obesity and lifestyle factors."
+  },
+  {
+    "question": "What are the symptoms of a heart attack?",
+    "ground_truth": "Symptoms of a heart attack include chest pain or pressure, shortness of breath, pain radiating to the arm or jaw, nausea, sweating, and dizziness."
+  },
+  {
+    "question": "How is pneumonia diagnosed and treated?",
+    "ground_truth": "Pneumonia is diagnosed via chest X-ray, blood tests, and sputum cultures. Treatment involves antibiotics for bacterial pneumonia, antivirals for viral pneumonia, rest, fluids, and fever reducers."
+  },
+  {
+    "question": "What is osteoporosis and who is most at risk?",
+    "ground_truth": "Osteoporosis is a condition where bones become weak and brittle. Those most at risk include postmenopausal women, the elderly, people with low calcium intake, and those on corticosteroid therapy."
+  },
+  {
+    "question": "What are the signs and symptoms of anemia?",
+    "ground_truth": "Symptoms of anemia include fatigue, weakness, pale skin, shortness of breath, dizziness, cold hands and feet, and irregular heartbeat."
+  },
+  {
+    "question": "What is Alzheimer's disease and what are its early signs?",
+    "ground_truth": "Alzheimer's disease is a progressive neurological disorder causing memory loss and cognitive decline. Early signs include forgetting recent events, repeating questions, confusion with dates, and difficulty with familiar tasks."
+  },
+  {
+    "question": "How does HIV affect the immune system?",
+    "ground_truth": "HIV attacks CD4 T cells, which are crucial for immune response. Over time, this reduces the body's ability to fight infections and diseases, eventually progressing to AIDS if untreated."
+  },
+  {
+    "question": "What are the treatment options for depression?",
+    "ground_truth": "Depression is treated with antidepressant medications, psychotherapy (especially cognitive-behavioral therapy), lifestyle changes including exercise, and in severe cases, electroconvulsive therapy."
+  },
+  {
+    "question": "What is rheumatoid arthritis and how does it differ from osteoarthritis?",
+    "ground_truth": "Rheumatoid arthritis is an autoimmune disease causing joint inflammation, while osteoarthritis is due to wear and tear of cartilage. Rheumatoid arthritis often affects joints symmetrically and can involve systemic symptoms."
+  },
+  {
+    "question": "What are the causes and symptoms of hypothyroidism?",
+    "ground_truth": "Hypothyroidism is caused by an underactive thyroid gland, most commonly due to Hashimoto's thyroiditis. Symptoms include fatigue, weight gain, cold intolerance, constipation, dry skin, and depression."
+  },
+  {
+    "question": "What is the function of the liver in the human body?",
+    "ground_truth": "The liver filters blood, produces bile for digestion, metabolizes drugs and toxins, synthesizes proteins including clotting factors, and regulates blood sugar levels."
+  },
+  {
+    "question": "What are the symptoms and causes of kidney stones?",
+    "ground_truth": "Kidney stones cause severe flank pain, blood in urine, nausea, and frequent urination. They are caused by crystallization of minerals such as calcium oxalate, uric acid, or struvite in the kidneys."
+  },
+  {
+    "question": "What is COPD and what are its main causes?",
+    "ground_truth": "Chronic obstructive pulmonary disease (COPD) is a progressive lung disease characterized by airflow obstruction. The main cause is long-term cigarette smoking, though air pollution and occupational dust exposure also contribute."
+  },
+  {
+    "question": "How is tuberculosis transmitted and treated?",
+    "ground_truth": "Tuberculosis is transmitted through airborne droplets from an infected person. Treatment involves a combination of antibiotics including isoniazid, rifampicin, pyrazinamide, and ethambutol over 6 months or more."
+  },
+  {
+    "question": "What are the risk factors for stroke?",
+    "ground_truth": "Risk factors for stroke include hypertension, atrial fibrillation, diabetes, smoking, high cholesterol, obesity, and family history of stroke."
+  },
+  {
+    "question": "What is the role of insulin in the body?",
+    "ground_truth": "Insulin is a hormone produced by the pancreas that regulates blood glucose levels by enabling cells to absorb glucose for energy or storage as glycogen."
+  },
+  {
+    "question": "What are the symptoms of appendicitis?",
+    "ground_truth": "Symptoms of appendicitis include pain that begins around the navel and shifts to the lower right abdomen, nausea, vomiting, fever, and loss of appetite."
+  },
+  {
+    "question": "What is multiple sclerosis and how does it present?",
+    "ground_truth": "Multiple sclerosis is an autoimmune disease affecting the central nervous system. It presents with symptoms such as muscle weakness, vision problems, numbness, balance issues, and fatigue."
+  },
+  {
+    "question": "What causes peptic ulcers?",
+    "ground_truth": "Peptic ulcers are primarily caused by Helicobacter pylori bacterial infection and long-term use of NSAIDs. Stomach acid erodes the protective lining of the stomach or small intestine."
+  },
+  {
+    "question": "What are the symptoms of a urinary tract infection?",
+    "ground_truth": "Symptoms of a urinary tract infection include burning sensation during urination, frequent urge to urinate, cloudy or strong-smelling urine, pelvic pain in women, and low-grade fever."
+  },
+  {
+    "question": "How is epilepsy diagnosed and managed?",
+    "ground_truth": "Epilepsy is diagnosed using EEG, brain imaging (MRI/CT), and clinical history. Management includes antiepileptic drugs, ketogenic diet in some cases, and surgery for drug-resistant cases."
+  },
+  {
+    "question": "What is lupus and what are its common symptoms?",
+    "ground_truth": "Lupus is a systemic autoimmune disease. Common symptoms include a butterfly-shaped rash on the face, fatigue, joint pain, fever, photosensitivity, and organ involvement including kidneys and heart."
+  },
+  {
+    "question": "What are the causes of liver cirrhosis?",
+    "ground_truth": "Liver cirrhosis is caused by chronic alcohol abuse, chronic hepatitis B or C infection, nonalcoholic fatty liver disease, and autoimmune hepatitis leading to scarring of liver tissue."
+  },
+  {
+    "question": "What is the difference between bacterial and viral infections?",
+    "ground_truth": "Bacterial infections are caused by bacteria and can be treated with antibiotics. Viral infections are caused by viruses and do not respond to antibiotics; they are managed with antivirals or supportive care."
+  },
+  {
+    "question": "What are the symptoms of hyperthyroidism?",
+    "ground_truth": "Symptoms of hyperthyroidism include rapid heartbeat, weight loss, increased appetite, sweating, nervousness, tremors, heat intolerance, and enlarged thyroid gland."
+  },
+  {
+    "question": "What is gout and what causes it?",
+    "ground_truth": "Gout is a form of arthritis caused by accumulation of uric acid crystals in joints. It causes sudden, severe joint pain, redness, and swelling, most commonly in the big toe."
+  },
+  {
+    "question": "How does chemotherapy work in treating cancer?",
+    "ground_truth": "Chemotherapy uses cytotoxic drugs to kill rapidly dividing cancer cells. It works by interfering with DNA replication or cell division, and is often used in combination with surgery and radiation."
+  },
+  {
+    "question": "What are the signs of meningitis?",
+    "ground_truth": "Signs of meningitis include severe headache, high fever, stiff neck, sensitivity to light and sound, nausea, vomiting, and in severe cases, a non-blanching rash indicating meningococcal disease."
+  },
+  {
+    "question": "What is Parkinson's disease and what are its motor symptoms?",
+    "ground_truth": "Parkinson's disease is a neurodegenerative disorder. Motor symptoms include resting tremor, rigidity, bradykinesia (slowness of movement), and postural instability."
+  },
+  {
+    "question": "What are the warning signs of skin cancer?",
+    "ground_truth": "Warning signs of skin cancer include asymmetric moles, irregular borders, multiple colors, diameter larger than 6mm, and evolving size or shape — summarized by the ABCDE rule."
+  },
+  {
+    "question": "What causes high cholesterol and how is it treated?",
+    "ground_truth": "High cholesterol is caused by a diet high in saturated fats, lack of exercise, obesity, and genetic factors. Treatment includes statins, dietary changes, and increased physical activity."
+  },
+  {
+    "question": "What is celiac disease and how does it affect the body?",
+    "ground_truth": "Celiac disease is an autoimmune condition triggered by gluten ingestion. It damages the small intestine lining, leading to malabsorption of nutrients, diarrhea, bloating, and weight loss."
+  },
+  {
+    "question": "What are the types and symptoms of hepatitis?",
+    "ground_truth": "Hepatitis types A, B, C, D, and E all involve liver inflammation. Symptoms include jaundice, fatigue, abdominal pain, nausea, and dark urine. Hepatitis B and C can become chronic."
+  },
+  {
+    "question": "What is the function of red blood cells?",
+    "ground_truth": "Red blood cells carry oxygen from the lungs to body tissues and transport carbon dioxide back to the lungs for exhalation, facilitated by the protein hemoglobin."
+  },
+  {
+    "question": "What are the symptoms and treatment of malaria?",
+    "ground_truth": "Malaria symptoms include cyclical fever, chills, sweating, headache, and muscle pain. Treatment involves antimalarial drugs such as chloroquine, artemisinin-based combination therapies, and supportive care."
+  },
+  {
+    "question": "How does the immune system fight infections?",
+    "ground_truth": "The immune system uses physical barriers, innate immune cells (like neutrophils and macrophages), and adaptive immunity (T cells and B cells producing antibodies) to recognize and destroy pathogens."
+  },
+  {
+    "question": "What is endometriosis and what are its symptoms?",
+    "ground_truth": "Endometriosis is a condition where tissue similar to the uterine lining grows outside the uterus. Symptoms include pelvic pain, painful periods, pain during intercourse, and infertility."
+  },
+  {
+    "question": "What are the causes and treatments for insomnia?",
+    "ground_truth": "Insomnia is caused by stress, anxiety, depression, poor sleep habits, or medical conditions. Treatment includes cognitive-behavioral therapy for insomnia (CBT-I), sleep hygiene improvements, and medications like melatonin or sedatives."
+  },
+  {
+    "question": "What is the difference between benign and malignant tumors?",
+    "ground_truth": "Benign tumors are non-cancerous growths that do not invade neighboring tissues or spread. Malignant tumors are cancerous, can invade surrounding tissues, and may metastasize to other organs."
+  },
+  {
+    "question": "What is psoriasis and how is it managed?",
+    "ground_truth": "Psoriasis is a chronic autoimmune skin condition causing scaly, red patches. It is managed with topical corticosteroids, vitamin D analogues, phototherapy, and systemic therapies like biologics."
+  },
+  {
+    "question": "What are the symptoms of a panic attack?",
+    "ground_truth": "Symptoms of a panic attack include sudden intense fear, heart palpitations, shortness of breath, chest pain, dizziness, trembling, sweating, and a feeling of impending doom."
+  },
+  {
+    "question": "How is blood pressure measured and what do the numbers mean?",
+    "ground_truth": "Blood pressure is measured in mmHg as systolic over diastolic pressure. Normal is below 120/80 mmHg. Hypertension is diagnosed at 130/80 mmHg or higher."
+  },
+  {
+    "question": "What is the mechanism of action of antibiotics?",
+    "ground_truth": "Antibiotics work by inhibiting bacterial cell wall synthesis, protein synthesis, nucleic acid replication, or cell membrane function, depending on the antibiotic class."
+  },
+  {
+    "question": "What are the symptoms and causes of irritable bowel syndrome?",
+    "ground_truth": "IBS causes abdominal pain, bloating, diarrhea, and constipation. Its exact cause is unknown but involves gut-brain axis dysfunction, gut microbiome imbalance, and heightened bowel sensitivity."
+  },
+  {
+    "question": "What is the role of the pancreas in digestion?",
+    "ground_truth": "The pancreas produces digestive enzymes (amylase, lipase, proteases) that break down carbohydrates, fats, and proteins in the small intestine, and releases bicarbonate to neutralize stomach acid."
+  },
+  {
+    "question": "What are the symptoms of chickenpox?",
+    "ground_truth": "Chickenpox symptoms include an itchy rash that progresses from red spots to fluid-filled blisters, fever, fatigue, headache, and loss of appetite. It is caused by the varicella-zoster virus."
+  },
+  {
+    "question": "What is sickle cell disease and how does it affect patients?",
+    "ground_truth": "Sickle cell disease is a genetic blood disorder where red blood cells form an abnormal sickle shape. This causes blocked blood vessels, pain crises, anemia, organ damage, and increased susceptibility to infections."
+  },
+  {
+    "question": "What are the long-term complications of uncontrolled diabetes?",
+    "ground_truth": "Long-term complications of uncontrolled diabetes include diabetic neuropathy, retinopathy, nephropathy, cardiovascular disease, peripheral artery disease, and increased risk of infections."
+  }
+]

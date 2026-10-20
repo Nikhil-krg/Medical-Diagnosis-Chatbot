@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+vectorstore/
+eval_results.json
+.streamlit/
+INTERVIEW_PREP.md
